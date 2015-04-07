@@ -1,0 +1,20 @@
+.step(data-title='Protecting Sensitive Data', data-file='app/controllers/application_controller.rb', data-highlight='')
+  :markdown
+    ### Protecting Sensitive Data
+
+    In our application controller, which all our other controllers extend, we put helpers in place to use information in the session object to get information about the currently logged in user (if one exists).
+
+    Notably, we provide a protected `authenticate!` method which will redirect to our login page if there's no user associated with the current HTTP session.  Any controller in our application can use this method to protect sensitive routes - let's check out a quick example of this in action.
+
+.step(data-title="Protecting Routes", data-file='app/controllers/accounts_controller.rb')
+  :markdown
+    ### Protecting Routes
+
+    Our accounts controller only has a single route, but it applies `authenticate!` as a `before_filter` on all its routes. This protects the `show` route and any others we might add to this controller from being accessed by anyone who is not logged in to our application.
+
+    ### All Done!
+    And that's it! We've just implemented two-factor authentication in our Ruby on Rails application. Of course, there's much more we could do - requiring 2FA on every login attempt might be excessive for our users, so we might only require it for particularly sensitive requests and routes.
+
+    Authy also provides [a mobile app](https://www.authy.com/users) to generate tokens, so users with a smartphone might be able to take advantage of this option also. We might provide some guidance to this resource for users that want to take advantage of it.
+
+    We hope you found this tutorial useful - if you have any questions or feedback, please let us know! Send a note to [docs@twilio.com](mailto:docs@twilio.com) to say hi.
