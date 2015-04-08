@@ -1,12 +1,12 @@
 .step(data-title='Creating a User', data-file='app/controllers/users_controller.rb', data-highlight='')
   :markdown
-    ### Creating a User
+    ## Creating a User
 
     To create a user, we will need a Rails controller that handles two routes - one to display the new `User` form, and another to actually create the `User` model.  We'll come back to the controller in a second, but let's first take a look at the form our user will fill out to create a new User account.
 
-.step(data-title="New User Form", data-file='app/views/users/new.html.erb', data-language='erb')
+.step(data-title="New User Form", data-file='app/views/users/new.html.erb', data-language='html')
   :markdown
-    ### New User Form
+    ## New User Form
 
     When we create a new user, we ask for a name, e-mail address, and a password to power the knowledge factor of our authentication scheme. To enable 2FA, we also ask them for a mobile number with a country code, which we can use with Authy to send them one-time passwords via SMS.
 
@@ -14,7 +14,7 @@
 
 .step(data-title='Handling the Form POST', data-file='app/controllers/users_controller.rb', data-highlight='6-20')
   :markdown
-    ### Handling the Form POST
+    ## Handling the Form POST
 
     In our controller we take the input from our form and create a new `User` model. If the user is saved to the database successfully, we use the Authy gem to create a corresponding Authy User and save the ID for that user in our database.
 

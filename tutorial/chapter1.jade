@@ -1,6 +1,6 @@
 .step(data-title='How it Works', data-file='app/models/user.rb', data-highlight='')
   :markdown
-    ### How It Works
+    ## How It Works
 
     Adding two-factor authentication (2FA) to your web application can help increase the security of your user's data. [Multi-factor authentication](http://en.wikipedia.org/wiki/Multi-factor_authentication) determines the identity of a user by validating one or more of the following "factors":
 
@@ -13,9 +13,9 @@
     ![2FA High Level](//s3.amazonaws.com/howtodocs/2fa-high-level.png)
 
     Now it's time to look at some code! We'll begin by understanding the moving parts of this example [Ruby on Rails](http://rubyonrails.org/) application before diving into the actual implementation of the login flow.
-.step(data-title="Our App's Dependencies", data-file='Gemfile')
+.step(data-title="Our App's Dependencies", data-file='Gemfile', data-language='ruby')
   :markdown
-    ### Our App's Dependencies
+    ## Our App's Dependencies
 
     Our application's `Gemfile` contains a standard array of Ruby gems to support our Rails application. One addition we've made is the [Authy Ruby gem](https://github.com/authy/authy-ruby) to make integration with Authy's 2FA API a bit simpler.
 
@@ -24,7 +24,7 @@
 
 .step(data-title='Configuring Authy', data-file='config/initializers/authy.rb', data-highlight='')
   :markdown
-     ### Configuring Authy
+    ## Configuring Authy
 
     If you haven't already, now is the time to [sign up for Authy](https://dashboard.authy.com/signup). Create your first application, naming it whatever you wish. After you create your application, your "production" API key will be visible on your [dashboard](https://dashboard.authy.com):
 
@@ -36,7 +36,7 @@
 
 .step(data-title='What Goes Into a Login System?', data-file='db/schema.rb', data-highlight='')
   :markdown
-    ### What Goes Into a Login System?
+    ## What Goes Into a Login System?
 
     Authentication and authorization are some of the trickiest concepts to get right in a web application, and implementations vary quite a bit from application to application. But generally speaking, every login system has two concepts to implement:
 

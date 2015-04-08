@@ -1,12 +1,12 @@
 .step(data-title='Logging In with 2FA', data-file='app/controllers/sessions_controller.rb', data-highlight='')
   :markdown
-    ### Logging In with 2FA
+    ## Logging In with 2FA
 
     Our sessions controller handles all the steps involved in logging our user into the application. There's a number of steps involved in this process, but our first order of business is to validate the user's e-mail address and password. Let's check out how we do that first.
 
 .step(data-title="Checking the Password", data-file='app/controllers/sessions_controller.rb', data-highlight="2-16")
   :markdown
-    ### Checking the Password
+    ## Checking the Password
 
     These two route handlers are responsible for displaying our login form and handling a login form submission. We won't look at the HTML for the login form, as it's pretty basic - just two text fields for an e-mail and password.  The `new` method handles rendering that view for the `/sessions/new` route. With a little CSS assist from [Twitter Bootstrap](http://getbootstrap.com/) and [Font Awesome](http://fortawesome.github.io/Font-Awesome/), the login form will look something like this:
 
@@ -18,7 +18,7 @@
 
 .step(data-title='The 2FA Step', data-file='app/controllers/sessions_controller.rb', data-highlight='18-33')
   :markdown
-    ### The 2FA Step
+    ## The 2FA Step
 
     These two route handlers are responsible for displaying a form to enter the Authy verification code, and then validate the code that they entered.
 
