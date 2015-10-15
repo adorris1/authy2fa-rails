@@ -7,16 +7,15 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
       session[:pre_2fa_auth_user_id] = @user.id
-      Authy::API.request_sms(id: @user.authy_id)
-      redirect_to sessions_two_factor_path
+      
+      # Try to verify with OneTouch, will return response body
+      one_touch = @user.send_one_touch
+
+      render json: one_touch
     else
       @user ||= User.new(email: params[:email])
       render :new
     end
-  end
-
-  def two_factor
-    return redirect_to new_session_path unless session[:pre_2fa_auth_user_id]
   end
 
   def verify
