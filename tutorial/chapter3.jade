@@ -1,31 +1,36 @@
-.step(data-title='Logging In with 2FA', data-file='app/controllers/sessions_controller.rb', data-highlight='')
+.step(data-title='The 2FA Step', data-file='app/controllers/authy_controller.rb', data-highlight='22-40')
   :markdown
-    ## Logging In with 2FA
+    ## Sending a Token
 
-    Our sessions controller handles all the steps involved in logging our user into the application. There's a number of steps involved in this process, but our first order of business is to validate the user's e-mail address and password. Let's check out how we do that first.
+    These two route handlers are responsible for sending the token, and then validating the code that they entered.
 
-.step(data-title="Checking the Password", data-file='app/controllers/sessions_controller.rb', data-highlight="2-16")
-  :markdown
-    ## Checking the Password
+    In the case where our User already has the Authy app, but is not enabled for OneTouch this same method will trigger a push notification that will be sent to their phone, with a code inside the Authy app.
 
-    These two route handlers are responsible for displaying our login form and handling a login form submission. We won't look at the HTML for the login form, as it's pretty basic - just two text fields for an e-mail and password.  The `new` method handles rendering that view for the `/sessions/new` route. With a little CSS assist from [Twitter Bootstrap](http://getbootstrap.com/) and [Font Awesome](http://fortawesome.github.io/Font-Awesome/), the login form will look something like this:
-
-    ![The Login Form](//s3.amazonaws.com/howtodocs/2fa-screen-login.png)
-
-    The `create` route verifies the e-mail and password that are submitted by the user. If the password matches, the user's database ID is stored in the session object as `pre_2fa_auth_user_id` so we can refer to it later. 
-
-    Next, we use the Authy API to send a one-time password to the user's phone. The user will need to successfully enter the code Authy sends them on our web form to complete their login to our system. Let's check out how we do that next.
-
-.step(data-title='The 2FA Step', data-file='app/controllers/sessions_controller.rb', data-highlight='18-33')
-  :markdown
-    ## The 2FA Step
-
-    These two route handlers are responsible for displaying a form to enter the Authy verification code, and then validate the code that they entered.
-
-    The `two_factor` method displays a view with a single text field to enter the 2FA token sent previously via the Authy API. The verification form will look something like this to the end user:
+    A verification form will pop up over the login form. The verification form will look something like this to the end user:
 
     ![The Verification Form](//s3.amazonaws.com/howtodocs/2fa-screen-verify.png)
 
     The `verify` method is responsible for validating the token sent to our user via SMS.  First, we grab the `User` model by the ID we stored in the session during the previous step in `pre_2fa_auth_user_id`.  Next, we use the Authy API to validate the token our user entered against the one Authy sent them.  If the two match, our login process is complete!  We store the user's database ID in the session object as `user_id`, which we use to indicate that the user has sucessfully logged in to our application.
 
-    To wrap things up, let's see how we protect routes in our application based on the information we've stored in the session.
+.step
+  :markdown
+    ## Where to next?
+
+    That's it! We've just implemented two-factor auth using three different methods and the latest in Authy technology.
+
+    If you're a Ruby developer working with Twilio, you might enjoy these
+    other tutorials:
+
+    [**Masked Phone Numbers**](//www.twilio.com/docs/howto/walkthrough/masked-numbers/ruby/rails)
+
+    Protect your users' privacy by anonymously connecting them with Twilio Voice and SMS. Learn how to create disposable phone numbers on-demand, so two users can communicate without exchanging personal information.
+
+    [**Call Tracking**](h//www.twilio.com/docs/howto/walkthrough/call-tracking/ruby/rails)
+
+    Use Twilio to track the effectiveness of your marketing campaigns.
+
+    ### Did this help?
+
+    Thanks for checking out this tutorial! If you have any feedback to share
+    with us, we'd love to hear it. Tweet
+    [@twilio](http://twitter.com/twilio) to let us know what you think.
