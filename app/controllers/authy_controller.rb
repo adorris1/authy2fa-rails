@@ -17,7 +17,7 @@ class AuthyController < ApplicationController
   def one_touch_status
     @user = User.find(session[:pre_2fa_auth_user_id])
     session[:user_id] = @user.approved? ? @user.id : nil
-    render text: @user.authy_status
+    render plain: @user.authy_status
   end
 
   def send_token
@@ -35,8 +35,7 @@ class AuthyController < ApplicationController
       redirect_to account_path
     else
       flash.now[:danger] = "Incorrect code, please try again"
-      render :two_factor
+      redirect_to new_session_path
     end
   end
-  
 end
