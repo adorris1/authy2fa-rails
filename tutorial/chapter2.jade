@@ -15,7 +15,7 @@
     * [Enabling a User with Authy](//docs.authy.com/#section-Enabling_two-factor_on_a_user)
     * [All about Rails Sessions](//guides.rubyonrails.org/action_controller_overview.html#session)
 
-.step(data-file='app/controllers/sessions_controller.rb', data-highlight='6-20')
+.step(data-file='app/controllers/sessions_controller.rb', data-highlight='6-29')
   :markdown
     ## Logging in with Authy OneTouch
 
@@ -32,7 +32,7 @@
 
     In the next steps we'll look at how we handle cases where the User does not have OneTouch or denies the login request.
 
-.step(data-file='app/models/user.rb')
+.step(data-file='app/controllers/sessions_controller.rb', data-highlight='11-21')
   :markdown
     ## Sending the OneTouch Request
 
