@@ -7,7 +7,10 @@
       app yourself, [download the code and follow the instructions on
       GitHub](https://github.com/TwilioDevEd/authy2fa-rails).
 
-    Adding two-factor authentication (2FA) to your web application increases the security of your user's data. [Multi-factor authentication](http://en.wikipedia.org/wiki/Multi-factor_authentication) determines the identity of a user by validating once by logging into the app, and second by validating their mobile device.
+    Adding two-factor authentication (2FA) to your web application increases the 
+    security of your user's data. [Multi-factor authentication](http://en.wikipedia.org/wiki/Multi-factor_authentication) 
+    determines the identity of a user by validating once by logging into the app, 
+    and second by validating their mobile device.
 
     For the second factor, we will validate that the user has their mobile phone by either:
     * Sending them a OneTouch push notification to their mobile Authy app or
@@ -29,13 +32,17 @@
   :markdown
     ## Configuring Authy
 
-    If you haven't already, now is the time to [sign up for Authy](https://dashboard.authy.com/signup). Create your first application, naming it whatever you wish. After you create your application, your "production" API key will be visible on your [dashboard](https://dashboard.authy.com):
+    If you haven't already, now is the time to [sign up for Authy](https://dashboard.authy.com/signup). 
+    Create your first application, naming it whatever you wish. After you create your application, 
+    your "production" API key will be visible on your [dashboard](https://dashboard.authy.com):
 
     ![Authy Dashboard](//s3.amazonaws.com/howtodocs/2fa-authy-dashboard.png)
 
-    Once we have an Authy API key, we store it in this [initializer file](http://guides.rubyonrails.org/configuring.html). 
+    Once we have an Authy API key, we store it in this 
+    [initializer file](http://guides.rubyonrails.org/configuring.html). 
 
-    Now that we've configured our Rails app, let's take a look at how we register a user with Authy.
+    Now that we've configured our Rails app, let's take a look at how we 
+    register a user with Authy.
 
     ---
 
