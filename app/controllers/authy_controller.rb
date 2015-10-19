@@ -4,9 +4,7 @@ require 'Base64'
 class AuthyController < ApplicationController
   # Before we allow the incoming request to callback, verify
   # that it is an Authy request
-  before_filter :authenticate_authy_request, :only => [
-    :callback
-  ]
+  before_filter :authenticate_authy_request, :only => [:callback]
 
   protect_from_forgery except: [:callback, :send_token]
 
