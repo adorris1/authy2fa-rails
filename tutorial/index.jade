@@ -1,4 +1,198 @@
-.chapter(data-title='Application Setup')
-  include chapter1
-.chapter(data-title='Logging In with Authy')
-  include chapter2
+.step(data-title='How it Works', data-file='app/controllers/sessions_controller.rb', data-highlight='')
+  :markdown
+    ## About this application
+
+    This [Ruby on Rails](http://rubyonrails.org/) sample application is an
+      example of typical login flow. To run this sample
+      app yourself, [download the code and follow the instructions on
+      GitHub](https://github.com/TwilioDevEd/authy2fa-rails).
+
+    Adding two-factor authentication (2FA) to your web application increases the
+    security of your user's data. [Multi-factor authentication](http://en.wikipedia.org/wiki/Multi-factor_authentication)
+    determines the identity of a user by validating once by logging into the app,
+    and second by validating their mobile device.
+
+    For the second factor, we will validate that the user has their mobile phone by either:
+    * Sending them a OneTouch push notification to their mobile Authy app or
+    * Sending them a token through their mobile Authy app or
+    * Sending them a one-time token in a text message [sent with Authy via Twilio](http://www.authy.com/). Here's how this works at a high level:
+
+    ![2FA High Level](//s3.amazonaws.com/howtodocs/2fa-high-level.png)
+
+    Let's get started! Click the right arrow above to move to the next step
+      of the tutorial.
+
+    ---
+
+    **See Also:**
+    * [Getting Started with Ruby on Rails](http://guides.rubyonrails.org/getting_started.html)
+    * [Getting started with the Twilio Ruby gem](//twilio-ruby.readthedocs.org/en/latest/index.html#getting-started)
+
+.step(data-title='Configuring Authy', data-file='config/initializers/authy.rb', data-highlight='')
+  :markdown
+    ## Configuring Authy
+
+    If you haven't already, now is the time to [sign up for Authy](https://dashboard.authy.com/signup).
+    Create your first application, naming it whatever you wish. After you create your application,
+    your "production" API key will be visible on your [dashboard](https://dashboard.authy.com):
+
+    ![Authy Dashboard](//s3.amazonaws.com/howtodocs/2fa-authy-dashboard.png)
+
+    Once we have an Authy API key we register it as a environment variable.
+
+    Let's take a look at how we register a user with Authy.
+
+    ---
+
+      **See Also:**
+      * [Getting started with the Authy Ruby gem](//www.rubydoc.info/gems/authy/2.4.2)
+      * [Managing Environment Variables in Ruby](https://www.twilio.com/blog/2015/02/managing-development-environment-variables-across-multiple-ruby-applications.html)
+
+.step(data-file='app/controllers/users_controller.rb', data-highlight='6-22')
+  :markdown
+    ## Registering a User with Authy
+
+    When a new user _signs up_ for our website, we will call this route. This
+    will save our new user to the database and will register the user
+    with Authy.
+
+    In order to set up your application, Authy only needs the user's _email_,
+    _phone number_ and _country code_. In order to do a _two-factor authentication_,
+    we need to make sure we ask for this information at sign up.
+
+    Once we register the User with Authy we get an **authy id** back. This is
+    very important since it's how we will verify the identity of our User with
+    Authy.
+
+    ---
+
+    **See Also:**
+    * [Looking up an ActiveRecord object](//guides.rubyonrails.org/active_record_querying.html#retrieving-a-single-object)
+    * [Enabling a User with Authy](//docs.authy.com/#section-Enabling_two-factor_on_a_user)
+    * [All about Rails Sessions](//guides.rubyonrails.org/action_controller_overview.html#session)
+
+.step(data-file='app/controllers/sessions_controller.rb', data-highlight='6-29')
+  :markdown
+    ## Logging in with Authy OneTouch
+
+    When a User attempts to log in to our website, we will ask them for a second
+    form of identification. Let's take a look at OneTouch verification first.
+
+    ![Authy OneTouch Approval](//howtodocs.s3.amazonaws.com/onetouch-approved.gif)
+
+    OneTouch works like this:
+    * We attempt to send a User a _OneTouch Approval Request_.
+    * If the User has OneTouch enabled we will get a _success_ message back.
+    * The User hits **Approve** in their Authy app.
+    * Authy makes a POST request to our app with an _approved_ status.
+    * We log the User in.
+
+    In the next steps we'll look at how we handle cases where the User does not
+    have OneTouch, or denies the login request.
+
+.step(data-file='app/controllers/sessions_controller.rb', data-highlight='11-21')
+  :markdown
+    ## Sending the OneTouch Request
+
+    When our User logs in we immediately attempt to verify their identity with
+    OneTouch. We will fallback gracefully if they don't have a OneTouch device,
+    but we don't know until we try.
+
+    Authy allows us to input details with our OneTouch request, including a message,
+    a logo and so on. We could easily send any amount of details by appending
+    `details['some_detail']`. You could imagine a scenario where we send a
+    OneTouch request to approve a money transfer.
+
+    ```ruby
+    "message" => "Request to Send Money to Jarod's vault",
+    "details['Request From']" => "Jarod",
+    "details['Amount Request']" => "1,000,000",
+    "details['Currency']" => "Galleons",
+    ```
+    Once we send the request we need to update our User's `authy_status` based
+    on the response.
+
+    ---
+
+    **See Also:**
+    * [DataMapper DM-Types](//datamapper.org/docs/dm_more/types.html)
+    * [ActiveRecord: Enums](//edgeapi.rubyonrails.org/classes/ActiveRecord/Enum.html)
+
+.step(data-file='app/controllers/authy_controller.rb', data-highlight='11-22, 49-72, 5-7')
+  :markdown
+    ## Configuring the OneTouch callback
+
+    In order for our app to know what the _user_ did after we sent the
+    OneTouch request, we need to register a callback endpoint with Authy.
+
+    ![Authy OneTouch Callback](//howtodocs.s3.amazonaws.com/onetouch-callback-endpoint.png)
+
+    **Note:** In order to verify that the request is coming from Authy, we've
+    written the helper method `authenticate_request!` that will halt the request if it
+    appears it isn't coming from Authy.
+
+    Here in our callback, we look up the _user_ using the _Authy ID_ sent with
+    the Authy POST request. Ideally at this point we would probably use a
+    websocket to let our client know that we received a response from Authy.
+    However for this version we're going to keep it simple and just update the
+    `authy_status` on the User.
+
+    Let's take a look at the client-side code that will be handling this.
+
+    ---
+
+    **See Also:**
+    * [ActiveRecord find_by!](//guides.rubyonrails.org/active_record_querying.html#find-by)
+
+.step(data-file='app/assets/javascripts/sessions.js')
+  :markdown
+    ## Handle Two-Factor in the Browser
+
+    We've already taken a look at what's happening on the server side, so let's
+    step in front of the cameras and see how our JavaScript is interacting
+    with those server endpoints.
+
+    When we expect a OneTouch response, we will begin by polling `/authy/status`
+    until we see an Authy status is not empty. Let's take a look at this controller
+    and see what is happening.
+
+    ---
+
+    **See Also:**
+    * [jQuery Post method](//api.jquery.com/jquery.post/)
+    * [Bootstrap modals](//getbootstrap.com/javascript/#modals)
+
+.step(
+  data-file='app/controllers/authy_controller.rb',
+  data-highlight='36-47')
+  :markdown
+    ## Finish the 2FA Step
+
+    If `authy_status` is _approved_ the user will be redirected to the
+    protected content, otherwise we'll show the login form with a message that indicates
+    the request was _denied_.
+
+.step
+  :markdown
+    ## Where to next?
+
+    That's it! We've just implemented two-factor auth using three different
+    methods and the latest in Authy technology.
+
+    If you're a Ruby developer working with Twilio, you might enjoy these
+    other tutorials:
+
+    [**Masked Phone Numbers**](//www.twilio.com/docs/howto/walkthrough/masked-numbers/ruby/rails)
+
+    Protect your users' privacy by anonymously connecting them with Twilio Voice
+    and SMS. Learn how to create disposable phone numbers on-demand, so two
+    users can communicate without exchanging personal information.
+
+    [**Call Tracking**](h//www.twilio.com/docs/howto/walkthrough/call-tracking/ruby/rails)
+
+    Use Twilio to track the effectiveness of your marketing campaigns.
+
+    ### Did this help?
+
+    Thanks for checking this tutorial out! If you have any feedback to share with us,
+    we'd love to hear it. [Contact support](//www.twilio.com/help/contact) to let us know what you think.
