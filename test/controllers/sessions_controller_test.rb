@@ -17,10 +17,18 @@ class SessionsControllerTest < ActionController::TestCase
   end
 
   test "should post to create successfully" do
-    Authy::OneTouch.expects(:send_approval_request).with(id: "123", email: "blah@example.com").once
+    Authy::OneTouch
+      .expects(:send_approval_request)
+      .with(id: '123', message: 'Request to Login to Twilio demo app', details: {'Email Address' => 'blah@example.com'})
+      .returns('success' => true)
+      .once
+
     post :create, email: @user.email, password: user_params[:password]
     assert_response :success
     assert_equal @user.id, session["pre_2fa_auth_user_id"]
+
+    json_response = JSON.parse(response.body)
+    assert_equal true, json_response['success']
   end
 
   test "should post to create unsuccessfully" do
