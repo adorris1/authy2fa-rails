@@ -1,11 +1,11 @@
-.step(data-title='How it Works', data-file='app/controllers/sessions_controller.rb', data-highlight='')
+.step(data-title='About this application', data-file='app/controllers/sessions_controller.rb', data-highlight='')
   :markdown
     ## About this application
 
     This [Ruby on Rails](http://rubyonrails.org/) sample application is an
-      example of typical login flow. To run this sample
-      app yourself, [download the code and follow the instructions on
-      GitHub](https://github.com/TwilioDevEd/authy2fa-rails).
+    example of a typical login flow. To run this sample
+    app yourself, [download the code and follow the instructions on
+    GitHub](https://github.com/TwilioDevEd/authy2fa-rails).
 
     Adding two-factor authentication (2FA) to your web application increases the
     security of your user's data. [Multi-factor authentication](http://en.wikipedia.org/wiki/Multi-factor_authentication)
@@ -15,7 +15,9 @@
     For the second factor, we will validate that the user has their mobile phone by either:
     * Sending them a OneTouch push notification to their mobile Authy app or
     * Sending them a token through their mobile Authy app or
-    * Sending them a one-time token in a text message [sent with Authy via Twilio](http://www.authy.com/). Here's how this works at a high level:
+    * Sending them a one-time token in a text message [sent with Authy via Twilio](http://www.authy.com/).
+
+    Here's how this works at a high level:
 
     ![2FA High Level](//s3.amazonaws.com/howtodocs/2fa-high-level.png)
 
@@ -85,7 +87,7 @@
     * If the User has OneTouch enabled we will get a _success_ message back.
     * The User hits **Approve** in their Authy app.
     * Authy makes a POST request to our app with an _approved_ status.
-    * We log the User in.
+    * We log the user in.
 
     In the next steps we'll look at how we handle cases where the User does not
     have OneTouch, or denies the login request.
@@ -94,7 +96,7 @@
   :markdown
     ## Sending the OneTouch Request
 
-    When our User logs in we immediately attempt to verify their identity with
+    When our user logs in we immediately attempt to verify their identity with
     OneTouch. We will fallback gracefully if they don't have a OneTouch device,
     but we don't know until we try.
 
@@ -166,7 +168,7 @@
   data-file='app/controllers/authy_controller.rb',
   data-highlight='36-47')
   :markdown
-    ## Finish the 2FA Step
+    ## Finishing the 2FA Step
 
     If `authy_status` is _approved_ the user will be redirected to the
     protected content, otherwise we'll show the login form with a message that indicates
@@ -195,4 +197,5 @@
     ### Did this help?
 
     Thanks for checking this tutorial out! If you have any feedback to share with us,
-    we'd love to hear it. [Contact support](//www.twilio.com/help/contact) to let us know what you think.
+    we'd love to hear it.
+    [Contact the Twilio Developer Education Team](mailto:deved-oss@twilio.com) to let us know what you think.
