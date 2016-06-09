@@ -2,20 +2,20 @@
   :markdown
     ## About this application
 
-    This [Ruby on Rails](http://rubyonrails.org/) sample application is an
+    This [Ruby on Rails](//rubyonrails.org/) sample application is an
     example of a typical login flow. To run this sample
     app yourself, [download the code and follow the instructions on
-    GitHub](https://github.com/TwilioDevEd/authy2fa-rails).
+    GitHub](//github.com/TwilioDevEd/authy2fa-rails).
 
     Adding two-factor authentication (2FA) to your web application increases the
-    security of your user's data. [Multi-factor authentication](http://en.wikipedia.org/wiki/Multi-factor_authentication)
+    security of your user's data. [Multi-factor authentication](//en.wikipedia.org/wiki/Multi-factor_authentication)
     determines the identity of a user by validating once by logging into the app,
     and second by validating their mobile device.
 
     For the second factor, we will validate that the user has their mobile phone by either:
     * Sending them a OneTouch push notification to their mobile Authy app or
     * Sending them a token through their mobile Authy app or
-    * Sending them a one-time token in a text message [sent with Authy via Twilio](http://www.authy.com/).
+    * Sending them a one-time token in a text message [sent with Authy via Twilio](//www.authy.com/).
 
     Here's how this works at a high level:
 
@@ -27,16 +27,16 @@
     ---
 
     **See Also:**
-    * [Getting Started with Ruby on Rails](http://guides.rubyonrails.org/getting_started.html)
+    * [Getting Started with Ruby on Rails](//guides.rubyonrails.org/getting_started.html)
     * [Getting started with the Twilio Ruby gem](//twilio-ruby.readthedocs.org/en/latest/index.html#getting-started)
 
 .step(data-title='Configuring Authy', data-file='config/initializers/authy.rb', data-highlight='')
   :markdown
     ## Configuring Authy
 
-    If you haven't already, now is the time to [sign up for Authy](https://dashboard.authy.com/signup).
+    If you haven't already, now is the time to [sign up for Authy](//dashboard.authy.com/signup).
     Create your first application, naming it whatever you wish. After you create your application,
-    your "production" API key will be visible on your [dashboard](https://dashboard.authy.com):
+    your "production" API key will be visible on your [dashboard](//dashboard.authy.com):
 
     ![Authy Dashboard](//s3.amazonaws.com/howtodocs/2fa-authy-dashboard.png)
 
@@ -48,7 +48,7 @@
 
       **See Also:**
       * [Getting started with the Authy Ruby gem](//www.rubydoc.info/gems/authy/2.4.2)
-      * [Managing Environment Variables in Ruby](https://www.twilio.com/blog/2015/02/managing-development-environment-variables-across-multiple-ruby-applications.html)
+      * [Managing Environment Variables in Ruby](//www.twilio.com/blog/2015/02/managing-development-environment-variables-across-multiple-ruby-applications.html)
 
 .step(data-file='app/controllers/users_controller.rb', data-highlight='6-22')
   :markdown

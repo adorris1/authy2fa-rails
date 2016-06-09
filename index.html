@@ -10,19 +10,19 @@
   height:100%;
   width:100%;
 }</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="Two-Factor Authentication with Authy"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">Two-Factor Authentication with Authy</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Learn to implement two-factor authentication (2FA) in your web app with Twilio-powered Authy. 2FA helps further secure your users' data by validating more than just a password. This tutorial will show you the code to make it happen.</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="About this application" data-file="app/controllers/sessions_controller.rb" data-highlight="" class="step"><h2 id="about-this-application">About this application</h2>
-<p>This <a href="http://rubyonrails.org/">Ruby on Rails</a> sample application is an
+<p>This <a href="//rubyonrails.org/">Ruby on Rails</a> sample application is an
 example of a typical login flow. To run this sample
-app yourself, <a href="https://github.com/TwilioDevEd/authy2fa-rails">download the code and follow the instructions on
+app yourself, <a href="//github.com/TwilioDevEd/authy2fa-rails">download the code and follow the instructions on
 GitHub</a>.</p>
 <p>Adding two-factor authentication (2FA) to your web application increases the
-security of your user&#39;s data. <a href="http://en.wikipedia.org/wiki/Multi-factor_authentication">Multi-factor authentication</a>
+security of your user&#39;s data. <a href="//en.wikipedia.org/wiki/Multi-factor_authentication">Multi-factor authentication</a>
 determines the identity of a user by validating once by logging into the app,
 and second by validating their mobile device.</p>
 <p>For the second factor, we will validate that the user has their mobile phone by either:</p>
 <ul>
 <li>Sending them a OneTouch push notification to their mobile Authy app or</li>
 <li>Sending them a token through their mobile Authy app or</li>
-<li>Sending them a one-time token in a text message <a href="http://www.authy.com/">sent with Authy via Twilio</a>.</li>
+<li>Sending them a one-time token in a text message <a href="//www.authy.com/">sent with Authy via Twilio</a>.</li>
 </ul>
 <p>Here&#39;s how this works at a high level:</p>
 <p><img src="//s3.amazonaws.com/howtodocs/2fa-high-level.png" alt="2FA High Level"></p>
@@ -31,13 +31,13 @@ and second by validating their mobile device.</p>
 <hr>
 <p><strong>See Also:</strong></p>
 <ul>
-<li><a href="http://guides.rubyonrails.org/getting_started.html">Getting Started with Ruby on Rails</a></li>
+<li><a href="//guides.rubyonrails.org/getting_started.html">Getting Started with Ruby on Rails</a></li>
 <li><a href="//twilio-ruby.readthedocs.org/en/latest/index.html#getting-started">Getting started with the Twilio Ruby gem</a></li>
 </ul>
 </div><div data-title="Configuring Authy" data-file="config/initializers/authy.rb" data-highlight="" class="step"><h2 id="configuring-authy">Configuring Authy</h2>
-<p>If you haven&#39;t already, now is the time to <a href="https://dashboard.authy.com/signup">sign up for Authy</a>.
+<p>If you haven&#39;t already, now is the time to <a href="//dashboard.authy.com/signup">sign up for Authy</a>.
 Create your first application, naming it whatever you wish. After you create your application,
-your &quot;production&quot; API key will be visible on your <a href="https://dashboard.authy.com">dashboard</a>:</p>
+your &quot;production&quot; API key will be visible on your <a href="//dashboard.authy.com">dashboard</a>:</p>
 <p><img src="//s3.amazonaws.com/howtodocs/2fa-authy-dashboard.png" alt="Authy Dashboard"></p>
 <p>Once we have an Authy API key we register it as a environment variable.</p>
 <p>Let&#39;s take a look at how we register a user with Authy.</p>
@@ -45,7 +45,7 @@ your &quot;production&quot; API key will be visible on your <a href="https://das
 <p>  <strong>See Also:</strong></p>
 <ul>
 <li><a href="//www.rubydoc.info/gems/authy/2.4.2">Getting started with the Authy Ruby gem</a></li>
-<li><a href="https://www.twilio.com/blog/2015/02/managing-development-environment-variables-across-multiple-ruby-applications.html">Managing Environment Variables in Ruby</a></li>
+<li><a href="//www.twilio.com/blog/2015/02/managing-development-environment-variables-across-multiple-ruby-applications.html">Managing Environment Variables in Ruby</a></li>
 </ul>
 </div><div data-file="app/controllers/users_controller.rb" data-highlight="6-22" class="step"><h2 id="registering-a-user-with-authy">Registering a User with Authy</h2>
 <p>When a new user <em>signs up</em> for our website, we will call this route. This
@@ -96,7 +96,6 @@ on the response.</p>
 <hr>
 <p><strong>See Also:</strong></p>
 <ul>
-<li><a href="//datamapper.org/docs/dm_more/types.html">DataMapper DM-Types</a></li>
 <li><a href="//edgeapi.rubyonrails.org/classes/ActiveRecord/Enum.html">ActiveRecord: Enums</a></li>
 </ul>
 </div><div data-file="app/controllers/authy_controller.rb" data-highlight="11-22, 49-72, 5-7" class="step"><h2 id="configuring-the-onetouch-callback">Configuring the OneTouch callback</h2>
