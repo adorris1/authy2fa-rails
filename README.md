@@ -59,8 +59,9 @@ This project is built using the [Ruby on Rails](http://rubyonrails.org/) web fra
    $ bundle exec rails s
    ```
 
-1. Expose your application to the wider internet using [ngrok](http://ngrok.com). You can click
-  [here](https://www.twilio.com/blog/2015/09/6-awesome-reasons-to-use-ngrok-when-testing-webhooks.html) for more details.
+1. Expose your application to the wider internet using [ngrok](http://ngrok.com).
+
+  You can click [here](https://www.twilio.com/blog/2015/09/6-awesome-reasons-to-use-ngrok-when-testing-webhooks.html) for more details.
   This step is important because the application won't work as expected if you run it through localhost.
 
   ```bash
