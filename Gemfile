@@ -30,7 +30,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'authy' #, :git => 'https://github.com/authy/authy-ruby.git'
 
 # Use Unicorn as the app server
-gem 'unicorn'
+gem 'unicorn', '~> 5.2'
 
 # Use Twilio to send confirmation message
 gem 'twilio-ruby', '~> 5.0.0.rc17'
@@ -41,13 +41,13 @@ end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'byebug', '~> 9.0', '>= 9.0.6'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '~> 2.0'
 
   # Mocha for mocking
   gem 'mocha'
