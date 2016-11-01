@@ -27,10 +27,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 
 # Use Authy for 2FA
-gem 'authy', :git => 'https://github.com/authy/authy-ruby.git'
+gem 'authy' #, :git => 'https://github.com/authy/authy-ruby.git'
 
 # Use Unicorn as the app server
 gem 'unicorn'
+
+# Use Twilio to send confirmation message
+gem 'twilio-ruby', '~> 5.0.0.rc17'
 
 group :production do
   gem 'rails_12factor'
